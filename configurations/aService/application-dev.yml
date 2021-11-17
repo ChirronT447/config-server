@@ -1,0 +1,5 @@
+spring:
+  run: true
+
+test:
+  property: http://url-dev.com

@@ -1,0 +1,6 @@
+spring:
+  jpa: true
+  run: false
+
+test:
+  property: http://url.com

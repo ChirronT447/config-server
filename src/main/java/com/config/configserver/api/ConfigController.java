@@ -1,6 +1,6 @@
 package com.config.configserver.api;
 
-import com.config.configserver.service.ConfigQueryService;
+import com.config.configserver.service.ConfigDatabaseService;
 import com.config.configserver.exception.ResultNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,10 +21,10 @@ import static com.config.configserver.service.SqlStatements.*;
 @RestController
 public class ConfigController {
 
-    private final ConfigQueryService configQueryService;
+    private final ConfigDatabaseService configDatabaseService;
 
-    public ConfigController(final ConfigQueryService configQueryService) {
-        this.configQueryService = configQueryService;
+    public ConfigController(final ConfigDatabaseService configDatabaseService) {
+        this.configDatabaseService = configDatabaseService;
     }
 
     /**
@@ -38,7 +38,7 @@ public class ConfigController {
             @PathVariable final String application
     ) {
         try {
-            return ResponseEntity.ok(configQueryService.fetchConfiguration(APP_SQL, application));
+            return ResponseEntity.ok(configDatabaseService.fetchConfiguration(APP_SQL, application));
         } catch (SQLException e) {
             return ResponseEntity.internalServerError().body("Please check parameters");
         } catch (ResultNotFoundException e) {
@@ -59,7 +59,7 @@ public class ConfigController {
             @PathVariable final String profile
     ) {
         try {
-            return ResponseEntity.ok(configQueryService.fetchConfiguration(APP_PROFILE_SQL, application, profile));
+            return ResponseEntity.ok(configDatabaseService.fetchConfiguration(APP_PROFILE_SQL, application, profile));
         } catch (SQLException e) {
             return ResponseEntity.internalServerError().body("Please check parameters");
         } catch (ResultNotFoundException e) {
@@ -83,7 +83,7 @@ public class ConfigController {
             @PathVariable final String key
     ) {
         try {
-            return ResponseEntity.ok(configQueryService.fetchConfiguration(APP_PROFILE_KEY_SQL, application, profile, key));
+            return ResponseEntity.ok(configDatabaseService.fetchConfiguration(APP_PROFILE_KEY_SQL, application, profile, key));
         } catch (SQLException e) {
             return ResponseEntity.internalServerError().body("Please check parameters");
         } catch (ResultNotFoundException e) {

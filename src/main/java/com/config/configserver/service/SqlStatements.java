@@ -32,12 +32,17 @@ public class SqlStatements {
         ) res
     """;
 
-    public static final String INSERT = """
+    public static final String SINGLE_INSERT = """
         INSERT INTO public.properties(application, profile, label, prop_key, value)
         VALUES (
             ?, ?, ?, ?, ?
         );
     """;
+
+//    public static final String BULK_INSERT = """
+//        COPY PROPERTIES FROM STDIN
+//        VACUUM ANALYZE
+//    """;
 
     public static final String UPDATE = """
         UPDATE public.properties
